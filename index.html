@@ -1,0 +1,314 @@
+<!-- ... existing code ... -->
+        <!-- TOP HEADER -->
+        <header class="sticky top-0 z-30 bg-brand-darkBg/95 backdrop-blur-md px-4 py-3 border-b border-brand-cardBorder/60 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <button onclick="toggleTopMenu()" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-redDark to-brand-red flex items-center justify-center font-extrabold text-white text-lg tracking-wider shadow-lg shadow-brand-red/30 hover:scale-105 active:scale-95 transition">
+                    P2
+                </button>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-white">p2<span class="text-brand-red">hub</span></span>
+                        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ESCROW
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <!-- Top Dropdown Drawer Trigger -->
+                <button onclick="toggleTopMenu()" class="w-8 h-8 rounded-full bg-brand-cardBg border border-brand-cardBorder flex items-center justify-center text-xs text-brand-textMuted hover:text-white hover:border-brand-red transition">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Subscription Badge -->
+                <button onclick="switchTab('subscription')" class="px-2.5 py-1 rounded-full bg-brand-red/10 border border-brand-red/30 text-brand-red text-xs font-bold flex items-center gap-1 hover:bg-brand-red/20 transition">
+                    <i class="fa-solid font-bold fa-crown text-[10px]"></i>
+                    <span id="headerSubBadge">MAKER PRO</span>
+                </button>
+                <!-- Profile Avatar -->
+                <button onclick="switchTab('profile')" class="w-8 h-8 rounded-full bg-brand-cardBg border border-brand-cardBorder flex items-center justify-center text-xs text-white font-semibold hover:border-brand-red transition">
+                    <i class="fa-solid fa-user text-brand-textMuted"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- TOP DRAWER MENU (MRKT STYLE WITH LANGUAGE SELECTOR) -->
+        <div id="topDrawerMenu" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex justify-center hidden">
+            <div class="w-full max-w-md bg-brand-darkBg border-b border-brand-cardBorder p-4 space-y-4 max-h-[90vh] overflow-y-auto relative animate-in slide-in-from-top duration-200">
+                <div class="flex items-center justify-between border-b border-brand-cardBorder/60 pb-3">
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-brand-textMuted">МЕНЮ</span>
+                    <button onclick="toggleTopMenu()" class="w-7 h-7 rounded-full bg-brand-cardBg text-brand-textMuted hover:text-white flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- СООБЩЕСТВО -->
+                <div class="space-y-2">
+                    <div class="text-[11px] font-bold text-brand-textMuted uppercase tracking-wider">СООБЩЕСТВО</div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="#" class="p-2.5 rounded-xl bg-brand-cardBg border border-brand-cardBorder flex items-center justify-center gap-2 text-xs font-bold text-white hover:border-brand-red transition">
+                            <i class="fa-solid fa-bolt text-brand-red"></i> Буст канала
+                        </a>
+                        <a href="#" class="p-2.5 rounded-xl bg-brand-cardBg border border-brand-cardBorder flex items-center justify-center gap-2 text-xs font-bold text-white hover:border-brand-red transition">
+                            <i class="fa-brands fa-telegram text-brand-red"></i> Канал p2hub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ПОМОЩЬ -->
+                <div class="space-y-1.5 pt-2 border-t border-brand-cardBorder/40">
+                    <div class="text-[11px] font-bold text-brand-textMuted uppercase tracking-wider">ПОМОЩЬ</div>
+                    <a href="https://t.me/" target="_blank" class="p-3 rounded-xl bg-brand-cardBg border border-brand-cardBorder flex items-center justify-between text-xs font-semibold text-white hover:border-brand-red transition">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-headset text-brand-red text-sm"></i>
+                            <span>Поддержка 24/7</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-brand-textMuted"></i>
+                    </a>
+                </div>
+
+                <!-- ДОКУМЕНТЫ -->
+                <div class="space-y-1.5 pt-2 border-t border-brand-cardBorder/40">
+                    <div class="text-[11px] font-bold text-brand-textMuted uppercase tracking-wider">ДОКУМЕНТЫ</div>
+                    <a href="#" onclick="showToast('Условия использования p2hub Escrow'); return false;" class="p-3 rounded-xl bg-brand-cardBg border border-brand-cardBorder flex items-center justify-between text-xs font-semibold text-white hover:border-brand-red transition">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-file-lines text-brand-red text-sm"></i>
+                            <span>Условия использования и Регламент PDF</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-brand-textMuted"></i>
+                    </a>
+                </div>
+
+                <!-- ЯЗЫК -->
+                <div class="space-y-2 pt-2 border-t border-brand-cardBorder/40">
+                    <div class="text-[11px] font-bold text-brand-textMuted uppercase tracking-wider">ЯЗЫК / LANGUAGE</div>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <button onclick="selectLanguage('ru')" class="p-2 rounded-xl bg-brand-cardBg border border-brand-red font-bold text-white flex items-center justify-center gap-1.5">
+                            🇷🇺 Русский
+                        </button>
+                        <button onclick="selectLanguage('en')" class="p-2 rounded-xl bg-brand-cardBg border border-brand-cardBorder font-medium text-brand-textMuted hover:text-white flex items-center justify-center gap-1.5">
+                            🇬🇧 English
+                        </button>
+                        <button onclick="selectLanguage('tr')" class="p-2 rounded-xl bg-brand-cardBg border border-brand-cardBorder font-medium text-brand-textMuted hover:text-white flex items-center justify-center gap-1.5">
+                            🇹🇷 Türkçe
+                        </button>
+                        <button onclick="selectLanguage('zh')" class="p-2 rounded-xl bg-brand-cardBg border border-brand-cardBorder font-medium text-brand-textMuted hover:text-white flex items-center justify-center gap-1.5">
+                            🇨🇳 中文
+                        </button>
+                        <button onclick="selectLanguage('fa')" class="p-2 rounded-xl bg-brand-cardBg border border-brand-cardBorder font-medium text-brand-textMuted hover:text-white flex items-center justify-center gap-1.5">
+                            🇮🇷 فارسی
+                        </button>
+                        <button onclick="selectLanguage('es')" class="p-2 rounded-xl bg-brand-cardBg border border-brand-cardBorder font-medium text-brand-textMuted hover:text-white flex items-center justify-center gap-1.5">
+                            🇪🇸 Español
+                        </button>
+                    </div>
+                </div>
+
+                <!-- АНИМАЦИИ В МЕНЮ -->
+                <div class="pt-2 border-t border-brand-cardBorder/40 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-white">Показывать анимацию</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked onchange="showToast('Настройки анимаций обновлены')" class="sr-only peer">
+                        <div class="w-11 h-6 bg-brand-cardBg peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-red"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+<!-- ... existing code ... -->
+            <!-- TAB 4: PROFILE & SETTINGS -->
+            <section id="view-profile" class="hidden space-y-4">
+                <!-- User Profile Banner -->
+                <div class="p-4 rounded-2xl bg-brand-cardBg border border-brand-cardBorder space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-redDark via-brand-red to-white/20 flex items-center justify-center font-extrabold text-xl text-white border-2 border-brand-red shadow-lg shadow-brand-red/20">
+                                P2
+                            </div>
+                            <div>
+                                <div class="font-extrabold text-lg text-white flex items-center gap-1.5">
+                                    @arbitrage_pro
+                                    <i class="fa-solid fa-circle-check text-brand-red text-sm" title="Подтвержденный мейкер"></i>
+                                </div>
+                                <div class="text-xs text-brand-textMuted flex items-center gap-1.5 mt-0.5">
+                                    <span>ID: <b class="text-zinc-200">77492019</b></span>
+                                    <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] px-1.5 py-0.2 rounded font-bold">1 Аккаунт</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="bg-brand-red/10 border border-brand-red/30 text-brand-red text-[11px] font-extrabold px-2.5 py-1 rounded-xl">
+                            PRO
+                        </span>
+                    </div>
+
+                    <!-- TOP PROFILE STATS CARDS (1: Сделки, 2: Отзывы, 3: Рейтинг 0-5) -->
+                    <div class="grid grid-cols-3 gap-2 pt-1 border-t border-brand-cardBorder/60">
+                        <div class="p-2.5 rounded-xl bg-black/40 border border-brand-cardBorder text-center">
+                            <div class="text-[10px] text-brand-textMuted font-semibold mb-0.5"><i class="fa-solid fa-handshake text-brand-red"></i> Сделки</div>
+                            <div class="text-base font-extrabold text-white">342</div>
+                            <div class="text-[9px] text-emerald-400 font-semibold">99.4% успехов</div>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-black/40 border border-brand-cardBorder text-center cursor-pointer hover:border-brand-red/50 transition" onclick="showToast('Показано 128 проверенных отзывов')">
+                            <div class="text-[10px] text-brand-textMuted font-semibold mb-0.5"><i class="fa-solid fa-comments text-brand-red"></i> Отзывы</div>
+                            <div class="text-base font-extrabold text-white">128</div>
+                            <div class="text-[9px] text-brand-textMuted">от клиентов</div>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-black/40 border border-brand-cardBorder text-center">
+                            <div class="text-[10px] text-brand-textMuted font-semibold mb-0.5"><i class="fa-solid fa-star text-amber-400"></i> Рейтинг</div>
+                            <div class="text-base font-extrabold text-amber-400 flex items-center justify-center gap-1">
+                                4.99 <span class="text-[10px] text-brand-textMuted font-normal">/ 5.0</span>
+                            </div>
+                            <div class="text-[9px] text-emerald-400 font-semibold">Топ 1% трейдеров</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFILE SETTINGS SECTION (Inspired by Settings Screen) -->
+                <div class="p-4 rounded-2xl bg-brand-cardBg border border-brand-cardBorder space-y-4">
+                    <div class="flex items-center gap-2 border-b border-brand-cardBorder/60 pb-2.5">
+                        <i class="fa-solid fa-sliders text-brand-red"></i>
+                        <h3 class="font-extrabold text-sm text-white uppercase tracking-wider">Настройки приложения</h3>
+                    </div>
+
+                    <!-- 1. Display Currency Selector -->
+                    <div class="space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-xs font-bold text-white">
+                                <i class="fa-solid fa-coins text-brand-red"></i>
+                                <span>Основная валюта отображения</span>
+                            </div>
+                            <span class="text-[10px] text-brand-textMuted">Currency</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 p-1 bg-black/50 rounded-xl border border-brand-cardBorder text-xs">
+                            <button onclick="setProfileCurrency('RUB')" id="pCurr-RUB" class="py-1.5 font-bold rounded-lg bg-brand-red text-white shadow">
+                                🇷🇺 RUB
+                            </button>
+                            <button onclick="setProfileCurrency('USDT')" id="pCurr-USDT" class="py-1.5 font-semibold text-brand-textMuted hover:text-white">
+                                💲 USDT
+                            </button>
+                            <button onclick="setProfileCurrency('STARS')" id="pCurr-STARS" class="py-1.5 font-semibold text-brand-textMuted hover:text-white">
+                                ⭐ STARS
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Visual Theme Picker -->
+                    <div class="space-y-1.5 pt-2 border-t border-brand-cardBorder/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-xs font-bold text-white">
+                                <i class="fa-solid fa-moon text-brand-red"></i>
+                                <span>Тема оформления</span>
+                            </div>
+                            <span class="text-[10px] text-brand-textMuted">Theme</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div onclick="setAppTheme('dark')" id="themeCard-dark" class="p-2.5 rounded-xl bg-black border border-brand-red cursor-pointer transition">
+                                <div class="w-full h-7 rounded-lg bg-brand-cardBg border border-brand-cardBorder mb-1.5 flex items-center justify-center text-[10px] font-bold text-white">Aa</div>
+                                <span class="font-bold text-white text-[11px]">Тёмная</span>
+                            </div>
+                            <div onclick="setAppTheme('contrast')" id="themeCard-contrast" class="p-2.5 rounded-xl bg-brand-cardBg border border-brand-cardBorder hover:border-brand-cardBorder/80 cursor-pointer transition opacity-75">
+                                <div class="w-full h-7 rounded-lg bg-red-950/60 border border-brand-red mb-1.5 flex items-center justify-center text-[10px] font-bold text-brand-red">Aa</div>
+                                <span class="font-semibold text-brand-textMuted text-[11px]">Контраст</span>
+                            </div>
+                            <div onclick="setAppTheme('system')" id="themeCard-system" class="p-2.5 rounded-xl bg-brand-cardBg border border-brand-cardBorder hover:border-brand-cardBorder/80 cursor-pointer transition opacity-75">
+                                <div class="w-full h-7 rounded-lg bg-zinc-800 mb-1.5 flex items-center justify-center text-[10px] font-bold text-zinc-300">Aa</div>
+                                <span class="font-semibold text-brand-textMuted text-[11px]">Системная</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Order View Layout Switcher -->
+                    <div class="space-y-1.5 pt-2 border-t border-brand-cardBorder/40">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-xs font-bold text-white">
+                                <i class="fa-solid fa-border-all text-brand-red"></i>
+                                <span>Вид списка ордеров</span>
+                            </div>
+                            <span class="text-[10px] text-brand-textMuted">Layout</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button onclick="setOrderLayout('list')" id="layoutBtn-list" class="p-2.5 rounded-xl bg-brand-red/10 border border-brand-red text-brand-red font-bold flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-list-ul"></i> Стандартный
+                            </button>
+                            <button onclick="setOrderLayout('compact')" id="layoutBtn-compact" class="p-2.5 rounded-xl bg-black/40 border border-brand-cardBorder text-brand-textMuted hover:text-white font-medium flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-grip-lines"></i> Компактный
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 4. Sound & Push Notifications Toggle -->
+                    <div class="pt-2 border-t border-brand-cardBorder/40 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs font-bold text-white">
+                            <i class="fa-solid fa-bell text-brand-red"></i>
+                            <div>
+                                <div>Звук и Push-уведомления</div>
+                                <div class="text-[10px] font-normal text-brand-textMuted">Сигналы о новых ордерах и PDF-чеках</div>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked onchange="showToast('Настройки уведомлений сохранены')" class="sr-only peer">
+                            <div class="w-11 h-6 bg-brand-cardBg peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-red"></div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+<!-- ... existing code ... -->
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ... existing JavaScript state ...
+
+        // Top Drawer Toggle
+        function toggleTopMenu() {
+            const menu = document.getElementById('topDrawerMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function selectLanguage(lang) {
+            showToast(`Язык приложения изменен на: ${lang.toUpperCase()}`);
+            toggleTopMenu();
+        }
+
+        // Profile Settings Handlers
+        function setProfileCurrency(curr) {
+            ['RUB', 'USDT', 'STARS'].forEach(c => {
+                const btn = document.getElementById(`pCurr-${c}`);
+                if (c === curr) {
+                    btn.className = "py-1.5 font-bold rounded-lg bg-brand-red text-white shadow";
+                } else {
+                    btn.className = "py-1.5 font-semibold text-brand-textMuted hover:text-white";
+                }
+            });
+            showToast(`Валюта отображения: ${curr}`);
+        }
+
+        function setAppTheme(theme) {
+            ['dark', 'contrast', 'system'].forEach(t => {
+                const card = document.getElementById(`themeCard-${t}`);
+                if (t === theme) {
+                    card.className = "p-2.5 rounded-xl bg-black border border-brand-red cursor-pointer transition";
+                } else {
+                    card.className = "p-2.5 rounded-xl bg-brand-cardBg border border-brand-cardBorder hover:border-brand-cardBorder/80 cursor-pointer transition opacity-75";
+                }
+            });
+            showToast(`Тема интерфейса: ${theme}`);
+        }
+
+        function setOrderLayout(layout) {
+            const btnList = document.getElementById('layoutBtn-list');
+            const btnCompact = document.getElementById('layoutBtn-compact');
+
+            if (layout === 'list') {
+                btnList.className = "p-2.5 rounded-xl bg-brand-red/10 border border-brand-red text-brand-red font-bold flex items-center justify-center gap-2";
+                btnCompact.className = "p-2.5 rounded-xl bg-black/40 border border-brand-cardBorder text-brand-textMuted hover:text-white font-medium flex items-center justify-center gap-2";
+            } else {
+                btnCompact.className = "p-2.5 rounded-xl bg-brand-red/10 border border-brand-red text-brand-red font-bold flex items-center justify-center gap-2";
+                btnList.className = "p-2.5 rounded-xl bg-black/40 border border-brand-cardBorder text-brand-textMuted hover:text-white font-medium flex items-center justify-center gap-2";
+            }
+            showToast(`Вид списка: ${layout === 'list' ? 'Стандартный' : 'Компактный'}`);
+        }
+
+        // ... existing JavaScript functions ...
+    </script>
+</body>
+</html>
